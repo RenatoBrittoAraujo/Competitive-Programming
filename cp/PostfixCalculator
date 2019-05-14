@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isop(string a){
+    if(a.size()==1){
+        if(a[0]=='*'||a[0]=='+'||a[0]=='-'||a[0]=='/')return 1;
+    }
+    return 0;
+}
+
+int prf(int a,char c,int b){
+    switch(c){
+    case '+':
+        return a+b;
+    case '-':
+        return a-b;
+    case '*':
+        return a*b;
+    case '/':
+        return a/b;
+    }
+}
+
+void print(stack<int> s){
+    vector<int> t;
+    int v = s.size();
+    for(int i=0;i<v;i++){
+        t.push_back(s.top());
+        s.pop();
+    }
+    reverse(t.begin(),t.end());
+    for(int i=0;i<v;i++){
+        cout<<t[i];
+        if(i!=v)cout<<" ";
+    }
+}
+
+int main()
+{
+    string str;
+    while(getline(cin, str))
+    {
+        stack<int> r;
+        istringstream ss(str);
+        string num;
+        while(ss >> num)
+        {
+            if(isop(num)){
+                int a=r.top();
+                r.pop();
+                int b=r.top();
+                r.pop();
+                cout<<"operation ("<<num[0]<<") operands "<<a<<" "<<b<<endl;
+                int v = prf(b,num[0],a);
+                r.push(v);
+            }else{
+                r.push(stoi(num));
+            }
+            cout<<"Current stack -> ";
+            print(r);
+            cout<<endl;
+        }
+        cout<<"Final stack value (result): "<<r.top()<<endl;
+    }
+    return 0;
+}
