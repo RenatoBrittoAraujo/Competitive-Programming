@@ -1,0 +1,39 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <random>
+using namespace std;
+
+typedef std::mt19937 range;
+std::uniform_int_distribution<range::result_type> udist(0, 100);
+
+int randInt(int l, int r){
+	
+}
+
+int main(){
+
+	range rng;
+	
+	range::result_type const seedval = get_seed();
+	rng.seed(seedval);
+
+	int tamanho;
+	cout<<"Tamanho: \n";
+	cin>>tamanho;
+
+	vector<int> base(tamanho, 0);
+
+	for(size_t i = 0; i < base.size(); i++){
+
+		base[i] = udist(rng);
+	}
+
+	for(auto b: base){
+		cout<<b<<endl;
+	}
+
+}
+
+
